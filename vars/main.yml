@@ -1,0 +1,30 @@
+---
+dev_gateway: 10.1.1.254
+hom_gateway: 10.2.1.254
+prd_gateway: 10.3.1.254
+
+
+#
+# Command line vars
+# =================
+#
+# - vcenter_hostname
+# - vcenter_datacenter
+# - vcenter_clustername
+# - vcenter_resource_pool
+# - vcenter_datastore
+# - vcenter_folder
+#
+# - guest_id (must be listed in https://www.vmware.com/support/developer/vc-sdk/visdk25pubs/ReferenceGuide/vim.vm.GuestOsDescriptor.GuestOsIdentifier.html)
+# - guest_template
+# - guest_name
+# - guest_hostname
+# - guest_disk (in GB -- default 30)
+# - guest_memory (in MB -- default 1024)
+# - guest_cpu (default 1)
+#
+# - net_domain
+# - net_dns_server
+# - net_name (name of VMware Network)
+# - net_ip
+# - net_netmask

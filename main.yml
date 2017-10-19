@@ -1,0 +1,16 @@
+---
+- name: Play to provision a VM in a VMware vCenter
+  hosts: localhost
+  gather_facts: false
+  connection: local
+
+  vars_files:
+    - vars/main.yml
+    - vars/secret.yml
+
+  tasks:
+  - name: Setup vars
+    include: tasks/setup_vars.yml
+
+  - name: Provision VM
+    include: tasks/provision.yml

@@ -1,0 +1,45 @@
+---
+- name: Check all the variables
+  fail: msg="Please check README for the mandatory vars"
+  when: vcenter_datacenter is not defined or
+        vcenter_clustername is not defined or
+        vcenter_resource_pool is not defined or
+        vcenter_folder is not defined or
+        guest_name is not defined or
+        net_name is not defined or
+        net_ip is not defined
+
+- name: Provisioning VM "{{ guest_name }}" on vCenter "{{ vcenter_hostname }}"
+  vmware_guest:
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    validate_certs: False
+    datacenter: "{{ vcenter_datacenter }}"
+    cluster: "{{ vcenter_clustername }}"
+    folder: "{{ vcenter_folder }}"
+    resource_pool: "{{ vcenter_resource_pool }}"
+    template: "{{ guest_template }}"
+    name: "{{ guest_name }}"
+    state: poweredon
+    guest_id: "{{ guest_id }}"
+    networks:
+    - name: "{{ net_name }}"
+      ip: "{{ net_ip }}"
+      netmask: "{{ net_netmask }}"
+      gateway: "{{ net_gateway }}"
+      device_type: vmxnet3
+    customization:
+      domain: "{{ net_domain }}"
+      dns_servers:
+      - "{{ net_dns_server }}"
+      dns_suffix:
+      - "{{ net_domain }}"
+    disk:
+    - datastore: "{{ vcenter_datastore }}"
+      size_gb: "{{ guest_disk | default(30) }}"
+      type: thin
+    hardware:
+      memory_mb: "{{ guest_memory | default(1024) }}"
+      num_cpus: "{{ guest_cpu | default(1) }}"
+    wait_for_ip_address: True

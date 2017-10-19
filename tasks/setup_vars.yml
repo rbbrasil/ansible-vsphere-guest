@@ -1,0 +1,15 @@
+---
+- name: Define gateway for DEV network
+  set_fact: net_gateway={{ dev_gateway }}
+  when: net_name == "DEV" or
+        net_name == "dev"
+
+- name: Define gateway for HOM network
+  set_fact: net_gateway={{ hom_gateway }}
+  when: net_name == "HOM" or
+        net_name == "hom"
+
+- name: Define gateway for DMZ network
+  set_fact: net_gateway={{ prd_gateway }}
+  when: net_name == "PRD" or
+        net_name == "prd"
